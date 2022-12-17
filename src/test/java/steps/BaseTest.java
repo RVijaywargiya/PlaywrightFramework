@@ -11,11 +11,15 @@ import utilities.PropertyLoader;
 import java.io.IOException;
 
 public class BaseTest {
+    public Playwright playwright;
+    public Browser browser;
+    public Page page;
 
     @Before
     public void setUp() {
-        try (Playwright playwright = Playwright.create()) {
-            Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(50));
+        try {
+            playwright = Playwright.create();
+            browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(50));
             Page page = browser.newPage();
             page.navigate(new PropertyLoader().getPropertyFromConfig("url"));
             System.out.println(page.title());
