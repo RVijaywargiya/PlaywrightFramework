@@ -10,14 +10,14 @@ import utilities.PageSetUp;
 
 public class LoginSteps extends PageSetUp {
 
-    private final Page page = getPage();
+    static private final Page page = getPage();
 
-    LoginPage loginPage;
-    HomePage homePage;
+    static LoginPage loginPage;
+    static HomePage homePage;
 
     public LoginSteps() {
-        this.loginPage = new LoginPage(page);
-        this.homePage = new HomePage(page);
+        loginPage = new LoginPage(page);
+        homePage = new HomePage(page);
     }
 
 
@@ -38,7 +38,7 @@ public class LoginSteps extends PageSetUp {
     }
 
     @Then("User should be able to login successfully")
-    public void userShouldBeAbleToLoginSuccessfully() {
+    public void userShouldBeAbleToLoginSuccessfully() throws InterruptedException {
         Assert.assertEquals(homePage.getPageTitle(), "Swag Labs","Home Page title is incorrect");
     }
 }
