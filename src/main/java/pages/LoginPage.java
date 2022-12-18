@@ -1,6 +1,8 @@
 package pages;
 
+import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
 import org.openqa.selenium.By;
 
 public class LoginPage {
@@ -11,12 +13,11 @@ public class LoginPage {
     }
 
     public String getPageTitle() {
-        return page.title();
+        return page.locator("//title").textContent();
     }
 
-    public LoginPage enterUsername(String userName) {
+    public void enterUsername(String userName) {
         page.locator("#user-name").type(userName);
-        return this;
     }
 
     public void enterPassword(String password) {
@@ -25,6 +26,5 @@ public class LoginPage {
 
     public void clickLoginBtn() {
         page.locator("#login-button").click();
-        new HomePage(page);
     }
 }
