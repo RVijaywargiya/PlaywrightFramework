@@ -23,8 +23,8 @@ public class BaseTest extends PageSetUp{
         }
     }
 
-    @After
-    public void tearDown() {
-        page.close();
-    }
+//    @After
+//    public void tearDown() {
+//        page.close();
+//    }
 }

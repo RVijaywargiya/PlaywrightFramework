@@ -27,4 +27,8 @@ public class LoginPage {
     public void clickLoginBtn() {
         page.locator("#login-button").click();
     }
+
+    public String getErrorMessage() {
+        return page.locator("//h3[@data-test='error']").textContent();
+    }
 }
