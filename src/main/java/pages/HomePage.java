@@ -5,10 +5,11 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import utilities.PageSetUp;
 
-public class HomePage extends PageSetUp {
+public class HomePage extends BasePage {
     private final Page page;
 
     public HomePage(Page page) {
+        super(page);
         this.page = page;
     }
 

@@ -1,31 +1,34 @@
 package pages;
 
-import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
-import org.openqa.selenium.By;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
     private final Page page;
 
     public LoginPage(Page page) {
+        super(page);
         this.page = page;
     }
 
+    private String loginPageTitle = "//title";
+    private String userNameXpath = "#user-name";
+    private String passwordXpath = "#password";
+    private String loginBtnXpath = "#login-button";
+
     public String getPageTitle() {
-        return page.locator("//title").textContent();
+        return getElementText(loginPageTitle);
     }
 
     public void enterUsername(String userName) {
-        page.locator("#user-name").type(userName);
+        enterText(userNameXpath,userName);
     }
 
     public void enterPassword(String password) {
-        page.locator("#password").type(password);
+        enterText(passwordXpath,password);
     }
 
     public void clickLoginBtn() {
-        page.locator("#login-button").click();
+        clickElement(loginBtnXpath);
     }
 
     public String getErrorMessage() {
