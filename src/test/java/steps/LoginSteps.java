@@ -39,7 +39,7 @@ public class LoginSteps extends PageSetUp {
     }
 
     @Then("User should be able to login successfully")
-    public void userShouldBeAbleToLoginSuccessfully() throws InterruptedException {
+    public void userShouldBeAbleToLoginSuccessfully() {
         Assert.assertEquals(homePage.getPageTitle(), "Swag Labs","Home Page title is incorrect");
     }
 
