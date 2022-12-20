@@ -3,6 +3,7 @@ package steps;
 
 import com.microsoft.playwright.Page;
 
+import config.ConfigurationManager;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import utilities.PageSetUp;
@@ -18,7 +19,8 @@ public class BaseTest extends PageSetUp {
     @Before
     public void setUp() {
         try {
-            page.navigate(new PropertyLoader().getPropertyFromConfig("url"));
+            maximize();
+            page.navigate(new PropertyLoader().getPropertyFromConfig(ConfigurationManager.configuration().baseUrl()));
             System.out.println(page.title());
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -27,5 +29,7 @@ public class BaseTest extends PageSetUp {
 
     @After
     public void tearDown() {
+        page.locator("//button[@id='react-burger-menu-btn']").click();
+        page.locator("//a[@id='logout_sidebar_link']").click();
     }
 }

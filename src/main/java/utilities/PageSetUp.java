@@ -2,6 +2,8 @@ package utilities;
 
 import com.microsoft.playwright.*;
 
+import java.awt.*;
+
 public class PageSetUp {
     private static Page page;
     private static Browser browser;
@@ -22,6 +24,11 @@ public class PageSetUp {
             page = getBrowser().newPage();
         }
         return page;
+    }
+
+    public static void maximize() {
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        page.setViewportSize(gd.getDisplayMode().getWidth(), gd.getDisplayMode().getHeight());
     }
 
 }
