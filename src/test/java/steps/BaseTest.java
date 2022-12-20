@@ -3,7 +3,6 @@ package steps;
 
 import com.microsoft.playwright.Page;
 
-import config.ConfigurationManager;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import utilities.PageSetUp;
@@ -20,7 +19,7 @@ public class BaseTest extends PageSetUp {
     public void setUp() {
         try {
             maximize();
-            page.navigate(new PropertyLoader().getPropertyFromConfig(ConfigurationManager.configuration().baseUrl()));
+            page.navigate(new PropertyLoader().getPropertyFromConfig());
             System.out.println(page.title());
         } catch (IOException e) {
             throw new RuntimeException(e);
