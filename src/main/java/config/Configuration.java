@@ -10,4 +10,7 @@ public interface Configuration extends Config{
 
     @Key("url.base")
     String baseUrl();
+
+    @Key("browser")
+    String browser();
 }

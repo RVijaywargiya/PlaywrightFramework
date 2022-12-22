@@ -38,17 +38,13 @@ public class LoginSteps extends PageSetUp {
         loginPage.clickLoginBtn();
     }
 
-    @Then("User should be able to login successfully")
-    public void userShouldBeAbleToLoginSuccessfully() {
-        Assert.assertEquals(homePage.getPageTitle(), "Swag Labs","Home Page title is incorrect");
-    }
-
     @Then("User should be able to login successfully with {string}")
     public void userShouldBeAbleToLoginSuccessfullyWith(String arg0) {
+        System.out.println("expected msg : " +arg0);
         if(arg0.equals("")) {
             Assert.assertEquals(homePage.getPageTitle(), "Swag Labs","Home Page title is incorrect");
             return;
         }
-        Assert.assertEquals(arg0,loginPage.getErrorMessage()," Error message is incorrect");
+        Assert.assertEquals(loginPage.getErrorMessage(), arg0,"Error message is incorrect");
     }
 }

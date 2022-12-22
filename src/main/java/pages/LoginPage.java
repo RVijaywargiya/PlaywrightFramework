@@ -15,6 +15,8 @@ public class LoginPage extends BasePage {
     private String passwordXpath = "#password";
     private String loginBtnXpath = "#login-button";
 
+    private String lockedOutUserErrorMsgText = "//div[@class='error-message-container error']";
+
     public String getPageTitle() {
         return getElementText(loginPageTitle);
     }
@@ -32,6 +34,6 @@ public class LoginPage extends BasePage {
     }
 
     public String getErrorMessage() {
-        return page.locator("//h3[@data-test='error']").textContent();
+        return getElementAttribute(lockedOutUserErrorMsgText, "innerText");
     }
 }

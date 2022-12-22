@@ -13,6 +13,10 @@ public class BasePage {
         return page.locator(locator).textContent();
     }
 
+    String getElementAttribute(String locator, String attribute) {
+        return page.locator(locator).getAttribute(attribute);
+    }
+
     void enterText(String locator, String text) {
         page.locator(locator).type(text);
     }

@@ -1,6 +1,7 @@
 package utilities;
 
 import com.microsoft.playwright.*;
+import config.ConfigurationManager;
 
 import java.awt.*;
 
@@ -12,11 +13,22 @@ public class PageSetUp {
         return Playwright.create();
     }
 
+    private static final String browserType = ConfigurationManager.configuration().browser();
+
     private static Browser getBrowser() {
-        if (browser == null) {
-            browser = getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(50));
+        if (browser == null)
+        {
+            switch (browserType) {
+                case "chrome" ->
+                        browser = getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false).setSlowMo(50));
+                case "edge" ->
+                        browser = getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(false).setSlowMo(50));
+                default -> {
+                }
+            }
         }
-        return browser;
+
+    return browser;
     }
 
     public static Page getPage() {
