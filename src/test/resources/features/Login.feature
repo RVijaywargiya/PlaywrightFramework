@@ -8,8 +8,8 @@ Feature: Login to sauce labs demo site
     Then User should be able to login successfully with "<error_message>"
     Examples:
       | username                | password     | error_message                                       |
-#      | standard_user           | secret_sauce |                                                     |
-      | locked_out_user         | secret_sauce | Epic sadface: Sorry, this user has been locked out. |
-#      | problem_user            | secret_sauce |                                                     |
-#      | performance_glitch_user | secret_sauce |                                                     |
+      | standard_user           | secret_sauce |                                                     |
+#      | locked_out_user         | secret_sauce | Epic sadface: Sorry, this user has been locked out. |
+      | problem_user            | secret_sauce |                                                     |
+      | performance_glitch_user | secret_sauce |                                                     |
 
