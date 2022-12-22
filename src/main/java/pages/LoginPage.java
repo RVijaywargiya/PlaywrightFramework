@@ -34,6 +34,6 @@ public class LoginPage extends BasePage {
     }
 
     public String getErrorMessage() {
-        return getElementAttribute(lockedOutUserErrorMsgText);
+        return getElementAttribute(lockedOutUserErrorMsgText, "innerText");
     }
 }
