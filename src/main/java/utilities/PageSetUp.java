@@ -48,9 +48,9 @@ public class PageSetUp {
             setPlaywright();
             setBrowser();
             setContext();
-//            setPage();
+            setPage();
         }
-        return getContext().newPage();
+        return page.get();
     }
 
     public static void setPage() {
