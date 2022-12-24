@@ -6,41 +6,60 @@ import config.ConfigurationManager;
 import java.awt.*;
 
 public class PageSetUp {
-    private static Page page;
-    private static Browser browser;
+    private static final ThreadLocal<Page> page = new ThreadLocal<>();
+    private static final ThreadLocal<Browser> browser = new ThreadLocal<>();
+    private static final ThreadLocal<BrowserContext> context = new ThreadLocal<>();
+    private static final ThreadLocal<Playwright> playwright = new ThreadLocal<>();
 
-    private static Playwright getPlaywright() {
-        return Playwright.create();
+    public static Playwright getPlaywright() {
+        return playwright.get();
+    }
+
+    public static void setPlaywright() {
+        playwright.set(Playwright.create());
+    }
+
+    public static Browser getBrowser() {
+        return browser.get();
     }
 
     private static final String browserType = ConfigurationManager.configuration().browser();
 
-    private static Browser getBrowser() {
-        if (browser == null)
-        {
-            switch (browserType) {
-                case "chrome" ->
-                        browser = getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false).setSlowMo(50));
-                case "edge" ->
-                        browser = getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(false).setSlowMo(50));
-                default -> {
-                }
+    public static void setBrowser() {
+        switch (browserType) {
+            case "chrome" ->
+                    browser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false).setSlowMo(50)));
+            case "edge" ->
+                    browser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(false).setSlowMo(50)));
+            default -> {
             }
         }
+    }
 
-    return browser;
+    public static void setContext() {
+        context.set(getBrowser().newContext());
+    }
+    public static BrowserContext getContext() {
+        return context.get();
     }
 
     public static Page getPage() {
-        if (page == null) {
-            page = getBrowser().newPage();
+        if(getPlaywright() == null) {
+            setPlaywright();
+            setBrowser();
+            setContext();
+//            setPage();
         }
-        return page;
+        return getContext().newPage();
+    }
+
+    public static void setPage() {
+        page.set(getContext().newPage());
     }
 
     public static void maximize() {
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        page.setViewportSize(gd.getDisplayMode().getWidth(), gd.getDisplayMode().getHeight());
+        getPage().setViewportSize(gd.getDisplayMode().getWidth(), gd.getDisplayMode().getHeight());
     }
 
 }

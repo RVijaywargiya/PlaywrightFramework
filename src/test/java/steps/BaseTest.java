@@ -28,7 +28,7 @@ public class BaseTest extends PageSetUp {
 
     @After
     public void tearDown() {
-        page.locator("//button[@id='react-burger-menu-btn']").click();
-        page.locator("//a[@id='logout_sidebar_link']").click();
+        getBrowser().close();
+        getPage().close();
     }
 }
