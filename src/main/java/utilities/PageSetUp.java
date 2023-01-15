@@ -25,7 +25,7 @@ public class PageSetUp {
 
     private static final String browserType = ConfigurationManager.configuration().browser();
 
-    public static void setBrowser() {
+    public static void setBrowser(String browserType) {
         switch (browserType) {
             case "chrome" ->
                     browser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false).setSlowMo(50)));
@@ -46,7 +46,7 @@ public class PageSetUp {
     public static Page getPage() {
         if(getPlaywright() == null) {
             setPlaywright();
-            setBrowser();
+            setBrowser(ConfigurationManager.configuration().browser());
             setContext();
             setPage();
         }
