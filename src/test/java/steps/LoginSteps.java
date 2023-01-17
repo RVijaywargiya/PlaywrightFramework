@@ -11,12 +11,12 @@ import utilities.PageSetUp;
 
 public class LoginSteps extends PageSetUp {
 
-    static private final Page page = getPage();
-
     static LoginPage loginPage;
     static HomePage homePage;
 
     public LoginSteps() {
+        Page page = getPage();
+//        BaseTest baseTest = new BaseTest(page);
         loginPage = new LoginPage(page);
         homePage = new HomePage(page);
     }
