@@ -2,6 +2,8 @@ package pages;
 
 import com.microsoft.playwright.Page;
 
+import java.awt.*;
+
 public class BasePage {
 
     private static Page page;
@@ -24,5 +26,11 @@ public class BasePage {
     void clickElement(String locator) {
         page.locator(locator).click();
     }
+
+    public static void maximize(Page page) {
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        page.setViewportSize(gd.getDisplayMode().getWidth(), gd.getDisplayMode().getHeight());
+    }
+
 
 }

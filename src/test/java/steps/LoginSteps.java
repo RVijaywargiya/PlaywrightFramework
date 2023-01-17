@@ -16,7 +16,6 @@ public class LoginSteps extends PageSetUp {
 
     public LoginSteps() {
         Page page = getPage();
-//        BaseTest baseTest = new BaseTest(page);
         loginPage = new LoginPage(page);
         homePage = new HomePage(page);
     }

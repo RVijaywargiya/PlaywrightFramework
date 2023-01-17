@@ -57,9 +57,4 @@ public class PageSetUp {
         page.set(getContext().newPage());
     }
 
-    public static void maximize() {
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        getPage().setViewportSize(gd.getDisplayMode().getWidth(), gd.getDisplayMode().getHeight());
-    }
-
 }
