@@ -9,13 +9,17 @@ import pages.HomePage;
 import pages.LoginPage;
 import utilities.PageFactory;
 
-public class LoginSteps extends PageFactory {
+import static steps.BaseTest.*;
+
+//import static utilities.PageFactory.getTlPage;
+
+public class LoginSteps {
 
     static LoginPage loginPage;
     static HomePage homePage;
 
     public LoginSteps() {
-        Page page = getTlPage();
+//        Page page = getTlPage();
         loginPage = new LoginPage(page);
         homePage = new HomePage(page);
     }
