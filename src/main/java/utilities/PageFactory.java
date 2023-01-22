@@ -18,7 +18,7 @@ public class PageFactory {
         return tlPlaywright.get();
     }
 
-    public static void setPlaywright() {
+    public static void setTlPlaywright() {
         tlPlaywright.set(Playwright.create());
     }
 
@@ -39,7 +39,7 @@ public class PageFactory {
         }
     }
 
-    public static void setContext() {
+    public static void setTlContext() {
         tlBrowserContext.set(getTlBrowser().newContext());
     }
     public static synchronized BrowserContext getTlBrowserContext() {
@@ -47,16 +47,16 @@ public class PageFactory {
     }
 
     public static synchronized Page getTlPage() {
-//        if(getTlPlaywright() == null) {
-            setPlaywright();
+        if(getTlPlaywright() == null) {
+            setTlPlaywright();
             setTlBrowser(ConfigurationManager.configuration().browser());
-            setContext();
-            setPage();
-//        }
+            setTlContext();
+            setTlPage();
+        }
         return tlPage.get();
     }
 
-    public static void setPage() {
+    public static void setTlPage() {
         tlPage.set(getTlBrowserContext().newPage());
     }
 

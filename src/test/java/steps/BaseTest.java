@@ -11,13 +11,15 @@ import java.io.IOException;
 
 public class BaseTest extends PageFactory {
 
+//    private Page page;
+
     @Before
     public void setUp() {
         try {
-            Page page = getTlPage();
+//            Page page = getTlPage();
             System.out.println("Thread ID : " + Thread.currentThread().getId());
-            BasePage.maximize(page);
-            page.navigate(new PropertyLoader().getBaseUrl());
+            BasePage.maximize(getTlPage());
+            getTlPage().navigate(new PropertyLoader().getBaseUrl());
             System.out.println(getTlPage().title());
         } catch (IOException e) {
             throw new RuntimeException(e);
