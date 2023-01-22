@@ -42,7 +42,7 @@ public class PageFactory {
     public static void setTlContext() {
         tlBrowserContext.set(getTlBrowser().newContext());
     }
-    public static synchronized BrowserContext getTlBrowserContext() {
+    public static synchronized BrowserContext getTlContext() {
         return tlBrowserContext.get();
     }
 
@@ -57,7 +57,7 @@ public class PageFactory {
     }
 
     public static void setTlPage() {
-        tlPage.set(getTlBrowserContext().newPage());
+        tlPage.set(getTlContext().newPage());
     }
 
 }
