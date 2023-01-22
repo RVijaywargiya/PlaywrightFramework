@@ -1,9 +1,6 @@
 package pages;
 
-import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
-import utilities.PageSetUp;
 
 public class HomePage extends BasePage {
     private final Page page;

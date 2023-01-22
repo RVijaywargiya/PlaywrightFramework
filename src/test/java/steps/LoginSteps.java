@@ -7,15 +7,15 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pages.HomePage;
 import pages.LoginPage;
-import utilities.PageSetUp;
+import utilities.PageFactory;
 
-public class LoginSteps extends PageSetUp {
+public class LoginSteps extends PageFactory {
 
     static LoginPage loginPage;
     static HomePage homePage;
 
     public LoginSteps() {
-        Page page = getPage();
+        Page page = getTlPage();
         loginPage = new LoginPage(page);
         homePage = new HomePage(page);
     }

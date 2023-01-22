@@ -3,22 +3,22 @@ package steps;
 import com.microsoft.playwright.Page;
 import io.cucumber.java.*;
 import pages.BasePage;
-import utilities.PageSetUp;
+import utilities.PageFactory;
 import utilities.PropertyLoader;
 
-import java.awt.*;
 import java.io.IOException;
 
 
-public class BaseTest extends PageSetUp {
+public class BaseTest extends PageFactory {
 
     @Before
     public void setUp() {
         try {
-            Page page = getPage();
+            Page page = getTlPage();
+            System.out.println("Thread ID : " + Thread.currentThread().getId());
             BasePage.maximize(page);
             page.navigate(new PropertyLoader().getBaseUrl());
-            System.out.println(getPage().title());
+            System.out.println(getTlPage().title());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
