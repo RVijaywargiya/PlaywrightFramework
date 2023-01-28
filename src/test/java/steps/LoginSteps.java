@@ -1,4 +1,5 @@
 package steps;
+
 import com.microsoft.playwright.Page;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -7,11 +8,8 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pages.HomePage;
 import pages.LoginPage;
-import utilities.PageFactory;
 
-import static steps.BaseTest.*;
-
-//import static utilities.PageFactory.getTlPage;
+import static steps.BaseTest.page;
 
 public class LoginSteps {
 
@@ -19,7 +17,7 @@ public class LoginSteps {
     static HomePage homePage;
 
     public LoginSteps() {
-//        Page page = getTlPage();
+//        Page page = BaseTest.page;
         loginPage = new LoginPage(page);
         homePage = new HomePage(page);
     }
@@ -28,6 +26,7 @@ public class LoginSteps {
     @Given("User is at login page")
     public void userIsAtLoginPage() {
         Assert.assertEquals(loginPage.getPageTitle(),"Swag Labs", "Title is incorrect");
+        System.out.println(Thread.currentThread().getId());
     }
 
     @And("Enter {string} and {string}")

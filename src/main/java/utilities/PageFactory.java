@@ -2,6 +2,10 @@ package utilities;
 
 import com.microsoft.playwright.*;
 import config.ConfigurationManager;
+import pages.BasePage;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class PageFactory {
 
@@ -14,7 +18,7 @@ public class PageFactory {
     private static final ThreadLocal<BrowserContext> tlBrowserContext = new ThreadLocal<>();
     private static final ThreadLocal<Playwright> tlPlaywright = new ThreadLocal<>();
 
-    public static synchronized Playwright getTlPlaywright() {
+    public static  Playwright getTlPlaywright() {
         return tlPlaywright.get();
     }
 
@@ -22,7 +26,7 @@ public class PageFactory {
         tlPlaywright.set(Playwright.create());
     }
 
-    public static synchronized Browser getTlBrowser() {
+    public static  Browser getTlBrowser() {
         return tlBrowser.get();
     }
 
@@ -30,10 +34,14 @@ public class PageFactory {
 
     public static void setTlBrowser(String browserType) {
         switch (browserType) {
-            case "chrome" ->
-                    tlBrowser.set(getTlPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false).setSlowMo(50)));
-            case "edge" ->
-                    tlBrowser.set(getTlPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(false).setSlowMo(50)));
+            case "chrome" -> {
+                tlBrowser.set(getTlPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false).setSlowMo(50)));
+                break;
+            }
+            case "edge" -> {
+                tlBrowser.set(getTlPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(false).setSlowMo(50)));
+                break;
+            }
             default -> {
             }
         }
@@ -42,22 +50,24 @@ public class PageFactory {
     public static void setTlContext() {
         tlBrowserContext.set(getTlBrowser().newContext());
     }
-    public static synchronized BrowserContext getTlContext() {
+    public static  BrowserContext getTlContext() {
         return tlBrowserContext.get();
     }
 
-    public static synchronized Page getTlPage() {
-        if(getTlPlaywright() == null) {
-            setTlPlaywright();
-            setTlBrowser(ConfigurationManager.configuration().browser());
-            setTlContext();
-            setTlPage();
-        }
+    public static Page initBrowser() throws IOException {
+        setTlPlaywright();
+        setTlBrowser(ConfigurationManager.configuration().browser());
+        setTlContext();
+        setTlPage();
         return tlPage.get();
     }
 
     public static void setTlPage() {
         tlPage.set(getTlContext().newPage());
+        System.out.println("Thread ID : " + Thread.currentThread().getId());
     }
 
+    public static Page getTlPage() {
+        return tlPage.get();
+    }
 }
