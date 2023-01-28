@@ -15,8 +15,8 @@ public class BasePage {
         return page.locator(locator).textContent();
     }
 
-    String getElementAttribute(String locator, String attribute) {
-        return page.locator(locator).getAttribute(attribute);
+    String getElementAttribute(String locator) {
+        return page.locator(locator).getAttribute("innerText");
     }
 
     void enterText(String locator, String text) {

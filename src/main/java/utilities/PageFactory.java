@@ -54,17 +54,17 @@ public class PageFactory {
         return tlBrowserContext.get();
     }
 
-    public static Page initBrowser() throws IOException {
+    public Page initBrowser() {
         setTlPlaywright();
         setTlBrowser(ConfigurationManager.configuration().browser());
         setTlContext();
         setTlPage();
-        return tlPage.get();
+        return getTlPage();
     }
 
     public static void setTlPage() {
         tlPage.set(getTlContext().newPage());
-        System.out.println("Thread ID : " + Thread.currentThread().getId());
+//        System.out.println("Thread ID : " + Thread.currentThread().getId());
     }
 
     public static Page getTlPage() {
