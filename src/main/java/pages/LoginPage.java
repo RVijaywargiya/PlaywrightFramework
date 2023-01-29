@@ -3,11 +3,11 @@ package pages;
 import com.microsoft.playwright.Page;
 
 public class LoginPage extends BasePage {
-    private final Page page;
+//    private final Page page;
 
     public LoginPage(Page page) {
         super(page);
-        this.page = page;
+//        this.page = page;
     }
 
     private String loginPageTitle = "//title";

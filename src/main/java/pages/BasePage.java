@@ -6,10 +6,10 @@ import java.awt.*;
 
 public class BasePage {
 
-    private static Page page;
+    private final Page page;
 
     public BasePage(Page page) {
-        BasePage.page = page;
+        this.page = page;
     }
     String getElementText(String locator) {
         return page.locator(locator).textContent();

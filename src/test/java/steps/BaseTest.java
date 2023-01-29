@@ -2,6 +2,8 @@ package steps;
 
 import com.microsoft.playwright.Page;
 import io.cucumber.java.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import pages.BasePage;
 import pages.HomePage;
 import pages.LoginPage;
@@ -12,16 +14,22 @@ import java.io.IOException;
 
 
 public class BaseTest {
+
+    PlaywrightFactory pf;
     Page page;
-    LoginPage loginPage;
-    HomePage homePage;
+    protected LoginPage loginPage;
+    protected HomePage homePage;
 
     @Before
     public void setUp() throws IOException {
-        page = new PlaywrightFactory().initBrowser();
-        page.navigate(new PropertyLoader().getBaseUrl());
+        pf = new PlaywrightFactory();
+        page = pf.initBrowser();
         loginPage = new LoginPage(page);
         homePage = new HomePage(page);
-        BasePage.maximize(page);
+    }
+
+    @After
+    public void tearDown() {
+        page.context().browser().close();
     }
 }

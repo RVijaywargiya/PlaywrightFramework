@@ -2,6 +2,10 @@ package utilities;
 
 import com.microsoft.playwright.*;
 import config.ConfigurationManager;
+import pages.BasePage;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class PlaywrightFactory {
 
@@ -50,11 +54,13 @@ public class PlaywrightFactory {
         return tlBrowserContext.get();
     }
 
-    public Page initBrowser() {
+    public Page initBrowser() throws IOException {
         setTlPlaywright();
         setTlBrowser(ConfigurationManager.configuration().browser());
         setTlContext();
         setTlPage();
+        getTlPage().navigate(new PropertyLoader().getBaseUrl());
+        BasePage.maximize(getTlPage());
         return getTlPage();
     }
 
