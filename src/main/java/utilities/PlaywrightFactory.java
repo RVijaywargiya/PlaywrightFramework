@@ -2,12 +2,8 @@ package utilities;
 
 import com.microsoft.playwright.*;
 import config.ConfigurationManager;
-import pages.BasePage;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-public class PageFactory {
+public class PlaywrightFactory {
 
     Playwright playwright;
     Browser browser;
@@ -64,7 +60,6 @@ public class PageFactory {
 
     public static void setTlPage() {
         tlPage.set(getTlContext().newPage());
-//        System.out.println("Thread ID : " + Thread.currentThread().getId());
     }
 
     public static Page getTlPage() {
