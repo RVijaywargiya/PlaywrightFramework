@@ -6,7 +6,7 @@ import org.testng.annotations.DataProvider;
 
 @CucumberOptions(features = "src/test/resources/features/",
         glue = {"steps"},
-        plugin = {"pretty","html:target/cucumber-reports.html"},
+//        plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
         monochrome = true)
 public class RunCucumberTest extends AbstractTestNGCucumberTests {
     @Override
