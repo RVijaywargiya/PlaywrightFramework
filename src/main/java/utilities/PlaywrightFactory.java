@@ -35,7 +35,7 @@ public class PlaywrightFactory {
     public static void setTlBrowser(String browserType) {
         switch (browserType) {
             case "chrome" -> {
-                tlBrowser.set(getTlPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false).setSlowMo(50)));
+                tlBrowser.set(getTlPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(true).setSlowMo(50)));
                 break;
             }
             case "edge" -> {

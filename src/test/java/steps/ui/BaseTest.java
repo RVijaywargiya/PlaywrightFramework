@@ -1,4 +1,4 @@
-package steps;
+package steps.ui;
 
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
