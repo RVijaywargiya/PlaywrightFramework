@@ -1,5 +1,9 @@
 package steps.api;
 
+import com.google.gson.Gson;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.microsoft.playwright.APIRequest;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
@@ -20,6 +24,7 @@ public class APISteps extends PlaywrightFactory {
                 .setBaseURL("https://reqres.in/"));
 
         response = request.get("api/users?page=2");
+        JsonObject json = new Gson().fromJson(response.text(), JsonObject.class);
         System.out.println(response.text());
     }
 }
