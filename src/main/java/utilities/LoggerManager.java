@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 public class LoggerManager {
 
-    private final Logger logger = LogManager.getLogManager().getLogger("Logger");
+    public final Logger logger = LogManager.getLogManager().getLogger("Logger");
 
 
 
