@@ -9,22 +9,33 @@ import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Playwright;
 import io.cucumber.java.en.Given;
+import utilities.APIUtility;
 import utilities.PlaywrightFactory;
+import utilities.PropertyLoader;
 
-public class APISteps extends PlaywrightFactory {
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
-    private Playwright playwright = Playwright.create();
+public class APISteps extends APIUtility {
 
-    private APIRequestContext request;
-    private APIResponse response;
+    Properties properties = new Properties();
+//    public Properties getProperty() throws IOException {
+//        properties.load(new FileInputStream("src/main/resources/api.properties"));
+//        return properties;
+//    }
 
     @Given("Get list of users")
-    public void getListOfUsers() {
-        request = playwright.request().newContext(new APIRequest.NewContextOptions()
-                .setBaseURL("https://reqres.in/"));
-
-        response = request.get("api/users?page=2");
-        JsonObject json = new Gson().fromJson(response.text(), JsonObject.class);
+    public void getListOfUsers() throws IOException {
+        properties.load(new FileInputStream("src/main/resources/api.properties"));
+        APIResponse response = new APIUtility().getResource(properties.getProperty("pathParam"));
         System.out.println(response.text());
+    }
+
+    @Given("Add user")
+    public void addUser() {
+
     }
 }
