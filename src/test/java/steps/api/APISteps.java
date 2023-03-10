@@ -16,7 +16,7 @@ public class APISteps extends APIUtility {
     public void getListOfUsers() throws IOException {
 
         properties.load(new FileInputStream("src/main/resources/api.properties"));
-        APIResponse response = new APIUtility().getResource(properties.getProperty("pathParam"));
+        APIResponse response = new APIUtility().getResource(properties.getProperty("baseUrl"),properties.getProperty("pathParam"));
         System.out.println(response.text());
     }
 

@@ -11,9 +11,9 @@ public class APIUtility {
     protected APIRequestContext request;
     protected APIResponse response;
 
-    public APIResponse getResource(String pathParam) {
+    public APIResponse getResource(String baseUrl, String pathParam) {
         request = playwright.request().newContext(new APIRequest.NewContextOptions()
-                .setBaseURL("https://reqres.in/"));
+                .setBaseURL(baseUrl));
         response = request.get(pathParam);
         return response;
     }
