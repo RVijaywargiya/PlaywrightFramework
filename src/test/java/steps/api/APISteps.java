@@ -1,6 +1,8 @@
 package steps.api;
 
 import com.microsoft.playwright.APIResponse;
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.JsonNode;
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.Given;
 import utilities.APIUtility;
 
@@ -10,14 +12,14 @@ import java.util.Properties;
 
 public class APISteps extends APIUtility {
 
-    Properties properties = new Properties();
+    APIResponse response;
 
     @Given("Get list of users")
     public void getListOfUsers() throws IOException {
-
-        properties.load(new FileInputStream("src/main/resources/api.properties"));
-        APIResponse response = new APIUtility().getResource(properties.getProperty("baseUrl"),properties.getProperty("pathParam"));
-        System.out.println(response.text());
+        response = new APIUtility().getResource(getProperty("baseUrl"),getProperty("pathParam"));
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jsonResponse = mapper.readTree(response.body());
+        System.out.println(jsonResponse.toPrettyString());
     }
 
     @Given("Add user")
