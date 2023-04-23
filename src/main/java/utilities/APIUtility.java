@@ -13,9 +13,8 @@ import java.util.Map;
 import java.util.Properties;
 
 public class APIUtility {
-    private Playwright playwright = Playwright.create();
+    private final Playwright playwright = Playwright.create();
 
-    protected APIRequestContext request;
     protected APIResponse response;
 
     Properties properties = new Properties();
