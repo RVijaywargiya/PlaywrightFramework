@@ -29,11 +29,6 @@ public class APISteps extends APIUtility {
         response = new APIUtility().getResource(getProperty("baseUrl"),getProperty("pathParamGet"));
     }
 
-    @Given("Add user")
-    public void addUser() {
-
-    }
-
     @And("Display response body")
     public void displayResponseBody() throws IOException {
         Map<String, String> headers = response.headers();
