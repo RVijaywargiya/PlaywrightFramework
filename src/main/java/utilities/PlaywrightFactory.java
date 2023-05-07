@@ -8,11 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class PlaywrightFactory {
-
-    Playwright playwright;
-    Browser browser;
-    BrowserContext browserContext;
-    Page page;
     private static final ThreadLocal<Page> tlPage = new ThreadLocal<>();
     private static final ThreadLocal<Browser> tlBrowser = new ThreadLocal<>();
     private static final ThreadLocal<BrowserContext> tlBrowserContext = new ThreadLocal<>();
