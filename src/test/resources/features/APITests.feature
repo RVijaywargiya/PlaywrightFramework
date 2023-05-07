@@ -1,11 +1,13 @@
 Feature: Request response API
 
-#  Scenario: Get list of users
-#    When Get list of users
-#    And Display response body
-#    Then Verify status as 200
+  Background: Setup playwright
+
+  Scenario: Get list of users
+    When Get list of users
+    And Display response body
+    Then Verify status as 200
 
   Scenario: Add user
-    When User makes a post call
+    When Create new user
     And Display response body
     Then Verify status as 201

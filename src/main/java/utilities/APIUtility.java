@@ -20,6 +20,8 @@ public class APIUtility {
     Properties properties = new Properties();
 
     public APIRequestContext getApiRequestContext() throws IOException {
+        TestReporter.setupReports();
+        TestReporter.startTest("My Test");
         return playwright.request().newContext(new APIRequest.NewContextOptions()
                 .setBaseURL(getProperty("baseUrl")));
     }

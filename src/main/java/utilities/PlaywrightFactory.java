@@ -30,8 +30,6 @@ public class PlaywrightFactory {
         return tlBrowser.get();
     }
 
-    private static final String browserType = ConfigurationManager.configuration().browser();
-
     public static void setTlBrowser(String browserType) {
         switch (browserType) {
             case "chrome" -> {

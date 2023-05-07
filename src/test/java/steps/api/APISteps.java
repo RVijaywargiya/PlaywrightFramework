@@ -44,7 +44,7 @@ public class APISteps extends APIUtility {
         Assert.assertEquals(response.status(), arg0, "Status code is incorrect");
     }
 
-    @When("User makes a post call")
+    @When("Create new user")
     public void userMakesAPostCall() throws IOException {
         response = new APIUtility().postResource(getProperty("pathParamPost"));
     }
