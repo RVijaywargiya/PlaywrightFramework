@@ -1,13 +1,15 @@
 Feature: Request response API
 
-  Background: Setup playwright
+  Background: Setup API
 
   Scenario: Get list of users
-    When Get list of users
-    And Display response body
-    Then Verify status as 200
+    Given I am an authorized user
+    When I get list of users
+    Then Verify users are displayed
 
   Scenario: Add user
-    When Create new user
-    And Display response body
-    Then Verify status as 201
+    Given I am an authorized user
+    When I create a new user
+    And Verify user is added
+    When I remove a user
+    Then Verify user is removed

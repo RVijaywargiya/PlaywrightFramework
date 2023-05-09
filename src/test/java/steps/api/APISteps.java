@@ -1,32 +1,26 @@
 package steps.api;
 
 import com.microsoft.playwright.APIResponse;
-import com.microsoft.playwright.options.HttpHeader;
-import io.cucumber.core.internal.com.fasterxml.jackson.databind.JsonNode;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.testng.Assert;
 import utilities.APIUtility;
+import static org.assertj.core.api.Assertions.*;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 public class APISteps extends APIUtility {
 
     APIResponse response;
-    JsonNode jsonResponse;
     private final ObjectMapper mapper = new ObjectMapper();
+    private static String baseUrl = null;
+    private static String getUserApiEndPoint = null;
 
     @Given("Get list of users")
     public void getListOfUsers() throws IOException {
-        response = new APIUtility().getResource(getProperty("baseUrl"),getProperty("pathParamGet"));
     }
 
     @And("Display response body")
@@ -46,6 +40,19 @@ public class APISteps extends APIUtility {
 
     @When("Create new user")
     public void userMakesAPostCall() throws IOException {
-        response = new APIUtility().postResource(getProperty("pathParamPost"));
+    }
+//-------------------------------------
+    @Given("I am an authorized user")
+    public void iAmAnAuthorizedUser() throws IOException {
+        baseUrl = getPropertyFromPropertyFile("baseUrl");
+        getUserApiEndPoint = getPropertyFromPropertyFile("pathParamGet");
+    }
+    @When("I get list of users")
+    public void iGetListOfUsers() throws IOException {
+        response = new APIUtility().getResource(baseUrl, getUserApiEndPoint);
+    }
+    @Then("Verify users are displayed")
+    public void verifyUsersAreDisplayed() {
+
     }
 }

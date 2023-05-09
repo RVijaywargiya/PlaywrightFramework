@@ -23,7 +23,7 @@ public class APIUtility {
         TestReporter.setupReports();
         TestReporter.startTest("My Test");
         return playwright.request().newContext(new APIRequest.NewContextOptions()
-                .setBaseURL(getProperty("baseUrl")));
+                .setBaseURL(getPropertyFromPropertyFile("baseUrl")));
     }
 
     private void loadPropertyFile() throws IOException {
@@ -31,7 +31,7 @@ public class APIUtility {
         properties.load(new FileInputStream(filePath));
     }
 
-    public String getProperty(String propertyName) throws IOException {
+    public String getPropertyFromPropertyFile(String propertyName) throws IOException {
         loadPropertyFile();
         return properties.getProperty(propertyName);
     }
