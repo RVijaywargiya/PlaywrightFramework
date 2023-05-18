@@ -20,7 +20,7 @@ public class APISteps extends APIUtility {
     private final ObjectMapper mapper = new ObjectMapper();
     private static String baseUrl = null;
     private static String getUserApiEndPoint = null;
-    SoftAssertions softAssert;
+    SoftAssertions softAssert = new SoftAssertions();
 
     @Given("Get list of users")
     public void getListOfUsers() throws IOException {
@@ -56,19 +56,20 @@ public class APISteps extends APIUtility {
     }
     @Then("Verify users are displayed")
     public void verifyUsersAreDisplayed() {
-        SoftAssertions test = new SoftAssertions();
-
-
+        softAssert.assertThat(response.status()).isEqualTo(200);
+        softAssert.assertThat(response.statusText()).isEqualTo("OK");
     }
 
     @When("I create a new user")
     public void iCreateANewUser() throws IOException {
         response = postResource("pathParamPost");
+        System.out.println(response.text());
     }
 
     @And("Verify user is added")
     public void verifyUserIsAdded() {
         softAssert.assertThat(response.status()).isEqualTo(200);
+        softAssert.assertThat(response.statusText()).isEqualTo("OK");
     }
 
     @When("I remove a user")
