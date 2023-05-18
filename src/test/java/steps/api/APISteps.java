@@ -6,7 +6,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.assertj.core.api.SoftAssertions;
 import utilities.APIUtility;
+
 import static org.assertj.core.api.Assertions.*;
 
 import java.io.IOException;
@@ -18,6 +20,7 @@ public class APISteps extends APIUtility {
     private final ObjectMapper mapper = new ObjectMapper();
     private static String baseUrl = null;
     private static String getUserApiEndPoint = null;
+    SoftAssertions softAssert;
 
     @Given("Get list of users")
     public void getListOfUsers() throws IOException {
@@ -35,7 +38,7 @@ public class APISteps extends APIUtility {
 
     @Then("Verify status as {int}")
     public void verifyStatusAs(int arg0) {
-        Assert.assertEquals(response.status(), arg0, "Status code is incorrect");
+        assertThat(response.status()).isEqualTo(arg0);
     }
 
     @When("Create new user")
@@ -53,6 +56,31 @@ public class APISteps extends APIUtility {
     }
     @Then("Verify users are displayed")
     public void verifyUsersAreDisplayed() {
+        SoftAssertions test = new SoftAssertions();
 
+
+    }
+
+    @When("I create a new user")
+    public void iCreateANewUser() throws IOException {
+        response = postResource("pathParamPost");
+    }
+
+    @And("Verify user is added")
+    public void verifyUserIsAdded() {
+        softAssert.assertThat(response.status()).isEqualTo(200);
+    }
+
+    @When("I remove a user")
+    public void iRemoveAUser() throws IOException {
+        response = deleteResource();
+    }
+
+
+    @Then("Verify user is removed")
+    public void verifyUserIsRemoved() {
+        softAssert.assertThat(response.status()).isEqualTo(200);
+        softAssert.assertThat(response.statusText()).isEqualTo("OK");
+        softAssert.assertThat(response.text()).isEqualTo("User deleted successfully");
     }
 }

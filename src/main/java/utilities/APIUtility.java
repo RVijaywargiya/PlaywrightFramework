@@ -5,6 +5,8 @@ import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.options.RequestOptions;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,6 +20,7 @@ public class APIUtility {
     protected APIResponse response;
 
     Properties properties = new Properties();
+    private static final Logger logger = LogManager.getLogger(APIUtility.class);
 
     public APIRequestContext getApiRequestContext() throws IOException {
         TestReporter.setupReports();
@@ -37,14 +40,21 @@ public class APIUtility {
     }
 
     public APIResponse getResource(String baseUrl, String pathParam) throws IOException {
+        logger.info("Invoking GET call with Base URL : " + baseUrl + "and end point as : " + pathParam);
         response = getApiRequestContext().get(pathParam);
         return response;
     }
 
     public APIResponse postResource(String pathParam) throws IOException {
+        logger.info("Invoking POST call with end point as : " + pathParam);
         Map<String, String> data = new HashMap<>();
         data.put("name","morpheus");
         data.put("job","leader");
         return getApiRequestContext().post(pathParam,RequestOptions.create().setData(data));
+    }
+
+    protected APIResponse deleteResource() throws IOException {
+        logger.info("Invoking DELETE call with Base URL" + "and end point as : " + "pathParamDelete");
+        return getApiRequestContext().delete("pathParamDelete");
     }
 }
