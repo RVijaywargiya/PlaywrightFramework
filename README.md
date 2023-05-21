@@ -4,6 +4,7 @@ Features:
 1. Language - Java v17
 2. Build tool - Maven
 3. Cucumber
-4. TestNG
-5. Log4j
-6. Faker library
+4. Gherkin
+5. TestNG
+6. Log4j
+7. Faker library
