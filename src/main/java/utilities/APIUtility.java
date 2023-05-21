@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import static utilities.FakeDataUtils.getId;
+
 public class APIUtility {
     private final Playwright playwright = Playwright.create();
 
@@ -48,8 +50,15 @@ public class APIUtility {
     public APIResponse postResource(String pathParam) throws IOException {
         logger.info("Invoking POST call with end point as : " + pathParam);
         Map<String, String> data = new HashMap<>();
-        data.put("name","morpheus");
-        data.put("job","leader");
+
+        data.put("id",getId());
+        data.put("name","Air India");
+        data.put("country","India");
+        data.put("logo","Padharo mhare des");
+        data.put("slogan","Padharo mhare des");
+        data.put("head_quarters","New Delhi");
+        data.put("website","www.airindia.test");
+        data.put("established","1900");
         return getApiRequestContext().post(pathParam,RequestOptions.create().setData(data));
     }
 

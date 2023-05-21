@@ -18,8 +18,8 @@ public class APISteps extends APIUtility {
 
     APIResponse response;
     private final ObjectMapper mapper = new ObjectMapper();
-    private static String baseUrl = null;
-    private static String getUserApiEndPoint = null;
+    private static String baseUrl;
+    private static String endPoint;
     SoftAssertions softAssert = new SoftAssertions();
 
     @Given("Get list of users")
@@ -48,40 +48,40 @@ public class APISteps extends APIUtility {
     @Given("I am an authorized user")
     public void iAmAnAuthorizedUser() throws IOException {
         baseUrl = getPropertyFromPropertyFile("baseUrl");
-        getUserApiEndPoint = getPropertyFromPropertyFile("pathParamGet");
+        endPoint = getPropertyFromPropertyFile("pathParamPost");
     }
-    @When("I get list of users")
-    public void iGetListOfUsers() throws IOException {
-        response = new APIUtility().getResource(baseUrl, getUserApiEndPoint);
-    }
+//    @When("I get list of users")
+//    public void iGetListOfUsers() throws IOException {
+//        response = new APIUtility().getResource(baseUrl, getUserApiEndPoint);
+//    }
     @Then("Verify users are displayed")
     public void verifyUsersAreDisplayed() {
         softAssert.assertThat(response.status()).isEqualTo(200);
         softAssert.assertThat(response.statusText()).isEqualTo("OK");
     }
 
-    @When("I create a new user")
-    public void iCreateANewUser() throws IOException {
-        response = postResource("pathParamPost");
+    @When("I create a new airline")
+    public void iCreateANewAirline() throws IOException {
+        response = postResource(endPoint);
         System.out.println(response.text());
     }
 
-    @And("Verify user is added")
-    public void verifyUserIsAdded() {
+    @And("Verify airline is added")
+    public void verifyAirlineIsAdded() {
         softAssert.assertThat(response.status()).isEqualTo(200);
         softAssert.assertThat(response.statusText()).isEqualTo("OK");
     }
 
-    @When("I remove a user")
-    public void iRemoveAUser() throws IOException {
+    @When("I remove an airline")
+    public void iRemoveAnAirline() throws IOException {
         response = deleteResource();
     }
 
 
-    @Then("Verify user is removed")
-    public void verifyUserIsRemoved() {
+    @Then("Verify airline is removed")
+    public void verifyAirlineIsRemoved() {
         softAssert.assertThat(response.status()).isEqualTo(200);
         softAssert.assertThat(response.statusText()).isEqualTo("OK");
-        softAssert.assertThat(response.text()).isEqualTo("User deleted successfully");
+        softAssert.assertThat(response.text()).isEqualTo("Airline deleted successfully");
     }
 }

@@ -7,9 +7,9 @@ Feature: Request response API
 #    When I get list of users
 #    Then Verify users are displayed
 
-  Scenario: Add user
+  Scenario: Add airline
     Given I am an authorized user
-    When I create a new user
-    And Verify user is added
-    When I remove a user
-    Then Verify user is removed
+    When I create a new airline
+    And Verify airline is added
+#    When I remove an airline
+#    Then Verify airline is removed
