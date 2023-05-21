@@ -1,4 +1,4 @@
-# Single framework for Web and API automation built with Playwright with Java
+# Test automation framework for Web and API automation built on top of Playwright with Java
 
 Features:
 1. Language - Java v17
