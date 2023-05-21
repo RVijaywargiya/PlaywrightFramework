@@ -8,3 +8,4 @@ Features:
 5. TestNG
 6. Log4j
 7. Faker library
+8. GitHub
