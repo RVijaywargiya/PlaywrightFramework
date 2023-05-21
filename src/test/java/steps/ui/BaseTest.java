@@ -4,13 +4,9 @@ import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Tracing;
 import io.cucumber.java.*;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import pages.BasePage;
 import pages.HomePage;
 import pages.LoginPage;
-import utilities.PlaywrightFactory;
-import utilities.PropertyLoader;
+import factory.PlaywrightFactory;
 
 import java.io.IOException;
 import java.nio.file.Paths;

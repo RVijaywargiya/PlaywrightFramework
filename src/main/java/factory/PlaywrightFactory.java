@@ -1,8 +1,9 @@
-package utilities;
+package factory;
 
 import com.microsoft.playwright.*;
 import config.ConfigurationManager;
 import pages.BasePage;
+import utilities.PropertyLoader;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
