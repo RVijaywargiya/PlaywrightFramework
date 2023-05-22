@@ -11,5 +11,3 @@ Feature: Request response API
     Given I am an authorized user
     When I create a new airline
     And Verify airline is added
-#    When I remove an airline
-#    Then Verify airline is removed

@@ -6,8 +6,11 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import lombok.Builder;
 import org.assertj.core.api.SoftAssertions;
+import pojo.Airline;
 import utilities.APIUtility;
+import utilities.FakeDataUtils;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -17,10 +20,10 @@ import java.util.Map;
 public class APISteps extends APIUtility {
 
     APIResponse response;
-    private final ObjectMapper mapper = new ObjectMapper();
     private static String baseUrl;
     private static String endPoint;
     SoftAssertions softAssert = new SoftAssertions();
+    private final FakeDataUtils fakeDataUtils = new FakeDataUtils();
 
     @Given("Get list of users")
     public void getListOfUsers() throws IOException {
@@ -29,7 +32,7 @@ public class APISteps extends APIUtility {
     @And("Display response body")
     public void displayResponseBody() throws IOException {
         Map<String, String> headers = response.headers();
-        headers.forEach((k,v) -> System.out.println(k + " : " + v));
+        headers.forEach((k, v) -> System.out.println(k + " : " + v));
         System.out.println(response.headers());
         System.out.println(response.status());
         System.out.println(response.statusText());
@@ -44,13 +47,15 @@ public class APISteps extends APIUtility {
     @When("Create new user")
     public void userMakesAPostCall() throws IOException {
     }
-//-------------------------------------
+
+    //-------------------------------------
     @Given("I am an authorized user")
     public void iAmAnAuthorizedUser() throws IOException {
         baseUrl = getPropertyFromPropertyFile("baseUrl");
         endPoint = getPropertyFromPropertyFile("pathParamPost");
     }
-//    @When("I get list of users")
+
+    //    @When("I get list of users")
 //    public void iGetListOfUsers() throws IOException {
 //        response = new APIUtility().getResource(baseUrl, getUserApiEndPoint);
 //    }
@@ -62,7 +67,17 @@ public class APISteps extends APIUtility {
 
     @When("I create a new airline")
     public void iCreateANewAirline() throws IOException {
-        response = postResource(endPoint);
+        Airline airline = Airline.builder()
+                .id(fakeDataUtils.getId())
+                .name(fakeDataUtils.getName())
+                .country(fakeDataUtils.getCountry())
+                .logo("https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Qatar_Airways_Logo.svg/sri_lanka.png")
+                .slogan("\"From Sri Lanka\"")
+                .head_quaters("\"Katunayake, Sri Lanka\"")
+                .website("www.srilankaairways.com")
+                .established("1990")
+                .build();
+        response = postResource(endPoint, airline);
         System.out.println(response.text());
     }
 
