@@ -14,12 +14,13 @@
         <extentVersion>5.0.9</extentVersion>
         <testngVersion>7.7.0</testngVersion>
         <playwrightVersion>1.28.1</playwrightVersion>
-        <cucumberVersion>7.10.0</cucumberVersion>
+        <cucumberVersion>6.11.0</cucumberVersion>
         <seleniumVersion>4.7.2</seleniumVersion>
         <lombokVersion>1.18.24</lombokVersion>
         <picoContainerVersion>7.2.3</picoContainerVersion>
         <assertJVersion>3.24.2</assertJVersion>
         <log4jVersion>2.14.1</log4jVersion>
+        <dataFakerVersion>1.9.0</dataFakerVersion>
     </properties>
     <build>
         <plugins>
@@ -97,30 +98,25 @@
             <version>3.0.0-M5</version>
         </dependency>
         <dependency>
-            <groupId>com.aventstack</groupId>
-            <artifactId>extentreports</artifactId>
-            <version>5.0.7</version>
-        </dependency>
-        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertJVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.aventstack</groupId>
-            <artifactId>extentreports</artifactId>
-            <version>${extentVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testngVersion}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
+        <!-- https://mvnrepository.com/artifact/net.datafaker/datafaker -->
         <dependency>
-            <groupId>com.github.javafaker</groupId>
-            <artifactId>javafaker</artifactId>
-            <version>1.0.2</version>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <version>${dataFakerVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>extentreports-cucumber6-adapter</artifactId>
+            <version>1.2.0</version>
         </dependency>
     </dependencies>
 </project>

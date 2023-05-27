@@ -1,6 +1,7 @@
 package utilities;
 
-import com.github.javafaker.Faker;
+
+import net.datafaker.Faker;
 
 public class FakeDataUtils {
     private static final Faker faker = new Faker();

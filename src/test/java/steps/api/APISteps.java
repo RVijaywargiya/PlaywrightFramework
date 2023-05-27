@@ -1,7 +1,6 @@
 package steps.api;
 
 import com.microsoft.playwright.APIResponse;
-import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
