@@ -1,11 +1,13 @@
 package steps.api;
 
 import com.microsoft.playwright.APIResponse;
+import factory.LoggerFactory;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.Builder;
+import org.apache.logging.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import pojo.Airline;
 import utilities.APIUtility;
@@ -23,6 +25,8 @@ public class APISteps extends APIUtility {
     private static String endPoint;
     SoftAssertions softAssert = new SoftAssertions();
     private final FakeDataUtils fakeDataUtils = new FakeDataUtils();
+
+    private final Logger logger = LoggerFactory.initLogger();
 
     @Given("Get list of users")
     public void getListOfUsers() throws IOException {
@@ -43,21 +47,13 @@ public class APISteps extends APIUtility {
         assertThat(response.status()).isEqualTo(arg0);
     }
 
-    @When("Create new user")
-    public void userMakesAPostCall() throws IOException {
-    }
-
-    //-------------------------------------
     @Given("I am an authorized user")
     public void iAmAnAuthorizedUser() throws IOException {
+        logger.info("Getting Base URL and endpoint from property file");
         baseUrl = getPropertyFromPropertyFile("baseUrl");
         endPoint = getPropertyFromPropertyFile("pathParamPost");
     }
 
-    //    @When("I get list of users")
-//    public void iGetListOfUsers() throws IOException {
-//        response = new APIUtility().getResource(baseUrl, getUserApiEndPoint);
-//    }
     @Then("Verify users are displayed")
     public void verifyUsersAreDisplayed() {
         softAssert.assertThat(response.status()).isEqualTo(200);
@@ -66,6 +62,7 @@ public class APISteps extends APIUtility {
 
     @When("I create a new airline")
     public void iCreateANewAirline() throws IOException {
+        logger.info("Building payload to create airline");
         Airline airline = Airline.builder()
                 .id(fakeDataUtils.getId())
                 .name(fakeDataUtils.getName())
@@ -76,8 +73,11 @@ public class APISteps extends APIUtility {
                 .website("www."+ fakeDataUtils.getCountry() + "airways.com")
                 .established(fakeDataUtils.getYear())
                 .build();
+        logger.info("Initiating POST call");
         response = postResource(endPoint, airline);
+        logger.info("POST call completed");
         System.out.println(response.text());
+        System.out.println("LOG LEVEL : "+logger.getLevel());
     }
 
     @And("Verify airline is added")

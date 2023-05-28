@@ -1,16 +1,30 @@
 package factory;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class LoggerFactory {
 
-    private static LoggerFactory loggerFactory;
+    private static final ThreadLocal<Logger> logger = new ThreadLocal<>();
 
-    private LoggerFactory() {
-
-    }
-    public LoggerFactory getLogger() {
-        if (loggerFactory == null){
-            loggerFactory = new LoggerFactory();
+    public static void setLogger() {
+        if(getLogger() == null) {
+            logger.set(LogManager.getLogger(LoggerFactory.class));
         }
-        return loggerFactory;
+    }
+
+    public static Logger getLogger() {
+        return logger.get();
+    }
+
+    public static Logger initLogger() {
+        setLogger();
+        setLogLevel();
+        return getLogger();
+    }
+
+    public static void setLogLevel() {
+        getLogger().atLevel(Level.DEBUG);
     }
 }
