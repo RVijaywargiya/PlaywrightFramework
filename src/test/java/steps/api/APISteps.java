@@ -71,10 +71,10 @@ public class APISteps extends APIUtility {
                 .name(fakeDataUtils.getName())
                 .country(fakeDataUtils.getCountry())
                 .logo("https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Qatar_Airways_Logo.svg/sri_lanka.png")
-                .slogan("\"From Sri Lanka\"")
-                .head_quaters("\"Katunayake, Sri Lanka\"")
-                .website("www.srilankaairways.com")
-                .established("1990")
+                .slogan("From" + fakeDataUtils.getCountry())
+                .head_quaters(fakeDataUtils.getCity() + ", " +fakeDataUtils.getCountry())
+                .website("www."+ fakeDataUtils.getCountry() + "airways.com")
+                .established(fakeDataUtils.getYear())
                 .build();
         response = postResource(endPoint, airline);
         System.out.println(response.text());
@@ -90,8 +90,7 @@ public class APISteps extends APIUtility {
     public void iRemoveAnAirline() throws IOException {
         response = deleteResource();
     }
-
-
+    
     @Then("Verify airline is removed")
     public void verifyAirlineIsRemoved() {
         softAssert.assertThat(response.status()).isEqualTo(200);

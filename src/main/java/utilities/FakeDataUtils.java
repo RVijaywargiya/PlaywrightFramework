@@ -18,4 +18,12 @@ public class FakeDataUtils {
         return faker.country().toString();
     }
 
+    public String getCity() {
+        return faker.address().cityName();
+    }
+
+    public String getYear() {
+        return Integer.toString(faker.number().numberBetween(1950, 2000));
+    }
+
 }
