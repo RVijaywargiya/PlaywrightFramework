@@ -9,6 +9,7 @@ import io.cucumber.java.en.When;
 import lombok.Builder;
 import org.apache.logging.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import org.testng.Assert;
 import pojo.Airline;
 import utilities.APIUtility;
 import utilities.FakeDataUtils;
@@ -96,5 +97,19 @@ public class APISteps extends APIUtility {
         softAssert.assertThat(response.status()).isEqualTo(200);
         softAssert.assertThat(response.statusText()).isEqualTo("OK");
         softAssert.assertThat(response.text()).isEqualTo("Airline deleted successfully");
+    }
+
+    @When("I get airline details")
+    public void iGetAirlineDetails() throws IOException {
+        logger.info("Getting airline data");
+        response = getResource(getPropertyFromPropertyFile("pathParamGet"));
+    }
+
+    @Then("I should see airline details")
+    public void iShouldSeeAirlineDetails() {
+        logger.info("Verify GET airline details call happens successfully");
+        Assert.assertEquals(response.status(),200, "Response code " + response.status() + "is incorrect");
+        System.out.println(response.status());
+        System.out.println(response.text());
     }
 }

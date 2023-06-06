@@ -39,25 +39,15 @@ public class APIUtility {
         return properties.getProperty(propertyName);
     }
 
-    public APIResponse getResource(String baseUrl, String pathParam) throws IOException {
-        logger.info("Invoking GET call with Base URL : " + baseUrl + "and end point as : " + pathParam);
-        response = getApiRequestContext().get(pathParam);
+    public APIResponse getResource(String pathParamGet) throws IOException {
+//        logger.info("Invoking GET call with Base URL : " + baseUrl + "and end point as : " + pathParamGet);
+        response = getApiRequestContext().get(pathParamGet);
         return response;
     }
 
     public APIResponse postResource(String pathParam, Object obj) throws IOException {
         logger.info("Invoking POST call with end point as : " + pathParam);
         Map<String, String> data = new HashMap<>();
-
-//        data.put("id",getId());
-//        data.put("name","Air India");
-//        data.put("country","India");
-//        data.put("logo","Padharo mhare des");
-//        data.put("slogan","Padharo mhare des");
-//        data.put("head_quarters","New Delhi");
-//        data.put("website","www.airindia.test");
-//        data.put("established","1900");
-
         return getApiRequestContext().post(pathParam,RequestOptions.create().setData(obj));
     }
 
