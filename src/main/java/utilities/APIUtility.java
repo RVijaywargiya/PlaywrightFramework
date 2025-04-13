@@ -39,8 +39,7 @@ public class APIUtility {
         return properties.getProperty(propertyName);
     }
 
-    public APIResponse getResource(String pathParamGet) throws IOException {
-//        logger.info("Invoking GET call with Base URL : " + baseUrl + "and end point as : " + pathParamGet);
+    public APIResponse get(String pathParamGet) throws IOException {
         response = getApiRequestContext().get(pathParamGet);
         return response;
     }

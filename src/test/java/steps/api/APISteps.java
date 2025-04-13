@@ -6,7 +6,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import lombok.Builder;
 import org.apache.logging.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.Assert;
@@ -102,7 +101,7 @@ public class APISteps extends APIUtility {
     @When("I get airline details")
     public void iGetAirlineDetails() throws IOException {
         logger.info("Getting airline data");
-        response = getResource(getPropertyFromPropertyFile("pathParamGet"));
+        response = get(getPropertyFromPropertyFile("pathParamGet"));
     }
 
     @Then("I should see airline details")
