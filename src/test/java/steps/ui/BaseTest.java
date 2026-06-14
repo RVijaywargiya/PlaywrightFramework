@@ -3,7 +3,7 @@ package steps.ui;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Tracing;
-import io.cucumber.java.*;
+//import io.cucumber.java.*;
 import pages.HomePage;
 import pages.LoginPage;
 import factory.PlaywrightFactory;
@@ -20,7 +20,7 @@ public class BaseTest {
     protected LoginPage loginPage;
     protected HomePage homePage;
 
-    @Before
+//    @Before
     public void setUp() throws IOException {
         pf = new PlaywrightFactory();
         page = pf.initBrowser();
@@ -32,7 +32,7 @@ public class BaseTest {
         homePage = new HomePage(page);
     }
 
-    @After
+//    @After
     public void tearDown() {
         PlaywrightFactory.getTlContext().tracing().stop(new Tracing.StopOptions()
                 .setPath(Paths.get("trace.zip")));

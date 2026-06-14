@@ -22,24 +22,28 @@ public class APIUtility {
     Properties properties = new Properties();
     private static final Logger logger = LogManager.getLogger(APIUtility.class);
 
-    public APIRequestContext getApiRequestContext() throws IOException {
-        TestReporter.setupReports();
-        TestReporter.startTest("My Test");
+    public APIRequestContext getApiRequestContext() {
+//        TestReporter.setupReports();
+//        TestReporter.startTest("My Test");
         return playwright.request().newContext(new APIRequest.NewContextOptions()
                 .setBaseURL(getPropertyFromPropertyFile("baseUrl")));
     }
 
-    private void loadPropertyFile() throws IOException {
+    private void loadPropertyFile() {
         String filePath = "src/main/resources/api.properties";
-        properties.load(new FileInputStream(filePath));
+        try {
+            properties.load(new FileInputStream(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public String getPropertyFromPropertyFile(String propertyName) throws IOException {
+    public String getPropertyFromPropertyFile(String propertyName) {
         loadPropertyFile();
         return properties.getProperty(propertyName);
     }
 
-    public APIResponse get(String pathParamGet) throws IOException {
+    public APIResponse get(String pathParamGet) {
         response = getApiRequestContext().get(pathParamGet);
         return response;
     }

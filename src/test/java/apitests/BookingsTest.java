@@ -1,39 +1,32 @@
 package apitests;
 
 import com.microsoft.playwright.APIResponse;
-import org.assertj.core.api.SoftAssertions;
-import org.testng.annotations.Factory;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import steps.api.BookingClient;
 
-import java.io.IOException;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BookingsTest {
 
     private BookingClient bookingClient;
-    private SoftAssertions softAssertions;
+    private APIResponse bookingsResponse;
 
-    public BookingsTest() {}
-
-    public BookingsTest(BookingClient bookingClient) {
-        this.bookingClient = new BookingClient();
-        softAssertions = new SoftAssertions();
+    @BeforeClass
+    public void setup() {
+        bookingClient = new BookingClient();
+        bookingsResponse = bookingClient.getBookingsAsApi();
     }
 
     @Test
-    public void verifyBookingStatusCode() throws IOException {
-        APIResponse bookingsJsonResponse = bookingClient.getBookingsAsApi();
-        Integer actualStatusCode = bookingsJsonResponse.status();
-        System.out.println("Status code : " + actualStatusCode);
-        softAssertions.assertThat(actualStatusCode).as("Check booking status").isEqualTo(200);
-        softAssertions.assertAll();
+    public void verifyBookingStatusCode() {
+        assertThat(bookingsResponse.status())
+                .as("Check booking status")
+                .isEqualTo(200);
     }
 
-    @Factory
-    public static Object[] createInstances() {
-        BookingClient bookingClient = new BookingClient();  // Create or configure the BookingClient as needed
-        return new Object[] { new BookingsTest(bookingClient) };
+    @Test
+    public void verifyResponse() {
+        System.out.println(bookingsResponse.text());
     }
-
-
 }

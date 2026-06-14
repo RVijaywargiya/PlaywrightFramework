@@ -31,7 +31,7 @@ public class BookingClient {
     }
 
     @Test
-    public APIResponse getBookingsAsApi() throws IOException {
+    public APIResponse getBookingsAsApi() {
         response = apiUtility.get("https://bookstore.toolsqa.com/BookStore/v1/Books");
         return response;
     }
