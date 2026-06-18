@@ -14,13 +14,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class APIUtility {
+public class BaseApiClient {
     private final Playwright playwright = Playwright.create();
 
     protected APIResponse response;
 
     Properties properties = new Properties();
-    private static final Logger logger = LogManager.getLogger(APIUtility.class);
+    private static final Logger logger = LogManager.getLogger(BaseApiClient.class);
 
     public APIRequestContext getApiRequestContext() {
 //        TestReporter.setupReports();
@@ -48,7 +48,7 @@ public class APIUtility {
         return response;
     }
 
-    public APIResponse postResource(String pathParam, Object obj) throws IOException {
+    public APIResponse post(String pathParam, Object obj) throws IOException {
         logger.info("Invoking POST call with end point as : " + pathParam);
         Map<String, String> data = new HashMap<>();
         return getApiRequestContext().post(pathParam,RequestOptions.create().setData(obj));

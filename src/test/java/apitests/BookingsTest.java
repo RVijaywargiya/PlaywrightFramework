@@ -15,7 +15,7 @@ public class BookingsTest {
     @BeforeClass
     public void setup() {
         bookingClient = new BookingClient();
-        bookingsResponse = bookingClient.getBookingsAsApi();
+        bookingsResponse = bookingClient.getAllBookingsResponse();
     }
 
     @Test
