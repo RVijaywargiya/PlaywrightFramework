@@ -13,3 +13,12 @@ Features:
 6. Log4j
 7. Faker library
 8. GitHub
+
+ConfigManager → configuration
+ApiContextManager → Playwright API lifecycle
+BookingClient → HTTP communication
+BookingService → business workflows
+BookingRequest/Response → DTOs
+BookingData → test data
+JsonUtils → serialization/deserialization
+BookingTest → assertions

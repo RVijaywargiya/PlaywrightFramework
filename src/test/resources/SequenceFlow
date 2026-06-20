@@ -1,0 +1,35 @@
+BookingTest
+    |
+    | validBooking()
+    v
+BookingData
+    |
+    | BookingRequest
+    v
+BookingService
+    |
+    | createBooking(request)
+    v
+BookingClient
+    |
+    | POST /booking
+    v
+API
+    |
+    | APIResponse
+    v
+BookingClient
+    |
+    v
+BookingService
+    |
+    | JsonUtils.fromJson()
+    v
+BookingResponse
+    |
+    v
+BookingTest
+    |
+    | Assertions
+    v
+PASS / FAIL

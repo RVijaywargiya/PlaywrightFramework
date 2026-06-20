@@ -1,0 +1,32 @@
+BookingTest
+    |
+    | uses
+    v
+BookingService
+    |
+    | uses
+    v
+BookingClient
+    |
+    | uses
+    +---------------------> ApiContextManager
+    |
+    | uses
+    +---------------------> ConfigManager
+
+BookingService
+    |
+    | uses
+    +---------------------> JsonUtils
+    |
+    | works with
+    +---------------------> BookingRequest
+    |
+    | returns
+    +---------------------> BookingResponse
+
+BookingData
+    |
+    | creates
+    v
+BookingRequest
